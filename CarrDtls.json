@@ -1,0 +1,5 @@
+[{ "CarrName":"BlueDart", "Rating":"4.5"},
+ { "CarrName":"DTDC", "Rating":"4"},
+ { "CarrName":"Aramex", "Rating":"3.5"},
+ { "CarrName":"Fedex", "Rating":"3"},
+ { "CarrName":"DHL", "Rating":"2.5"}]
