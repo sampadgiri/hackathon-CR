@@ -8,12 +8,12 @@
 			});
 		$http.get('CarrDtls.json')
 		   .then(function(res){
-			  $scope.CarrDtls = res.data;                
+			  $scope.CarrDtls = res.data; 
 			});
 		$scope.getStars = function(rating){
 			var val = parseFloat(rating);
 			var size = val/5*100;
 			return size + '%';
-			}
+			}		
 	});
 })();
