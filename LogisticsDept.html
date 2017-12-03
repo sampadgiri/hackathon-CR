@@ -2,50 +2,68 @@
 <html ng-app="App">
 	<head>
 		<meta charset="utf-8">
-		<title>Logistics Team Portal</title>
-		<link rel="stylesheet" href="style.css">
+		<title>Logistics Dept Portal</title>
+		<link rel="stylesheet" href="styleLogDep.css">
 		<script>document.write("<base href=\"" + document.location + "\" />");</script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="HomeApp.js"></script>
-
 		<link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
 		<script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
-
 	</head>
 	<body ng-controller="MainCtrl">
 		<div class="jumbotron" id="customers">
-			<h1>Logistics Team Portal</h1> 
+			<h1>Logistics Dept Portal</h1> 
 			<br>
 		</div>
-
-		<h3 id="customers">Order Details</h3>
-		<table id="customers">
-			<tr>
-				<th>Customer Name</th>
-				<th>Order Number</th>
-				<th>Customer Type</th>
-				<th>Carrier</th>
-			</tr>			
-			<tr ng-repeat="OrderDtl in OrderDtls">
-				<td>{{OrderDtl.CustName}}</td>
-				<td>{{OrderDtl.OrderNo}}</td>
-				<td>{{OrderDtl.CustType}}</td>
-				<td>{{OrderDtl.Carrier}}</td>
-			</tr>
-		<table>
-		
-		<h3 id="customers">Carrier Ratings</h3>
-		<table id="customers">
-			<tr>
-				<th>Carrier Name</th>
-				<th>Rating</th>
-				<th>Visualization</th>
-			</tr>			
-			<tr ng-repeat="CarrDtl in CarrDtls">
-				<td>{{CarrDtl.CarrName}}</td>
-				<td>{{CarrDtl.Rating}}</td>
-				<td><span class="stars alignright"><span ng-style="{ 'width': getStars({{CarrDtl.Rating}}) }"></span></span></td>
-			</tr>
-		<table>
+		<div class="tab" ng-init="style={'background-color' : '#69A3CA'}">
+			<button ng-style="style1" ng-click="page='first'; style1=style; style2=null" ng-init="style1=style; style2=null"><b>Order Details</b></button>
+			<button ng-style="style2" ng-click="page='second'; style2=style; style1=null"><b>Carrier Ratings</b></button>
+		</div>	  
+	  
+		<div ng-init="page='first'"></div>
+	  
+		<div ng-show="page === 'first'">
+		<br>	
+			<table id="customers">
+				<tr>
+					<th>Customer Name</th>
+					<th>Order Number</th>
+					<th>City</th>
+					<th>Customer Type</th>
+					<th>Assigned Carrier</th>
+					<th>Change Carrier?</th>
+				</tr>	
+				<tr ng-repeat="OrderDtl in OrderDtls">
+					<td>{{OrderDtl.CustName}}</td>
+					<td>{{OrderDtl.OrderNo}}</td>
+					<td>{{OrderDtl.City}}</td>
+					<td>{{OrderDtl.CustType}}</td>
+					<td>{{OrderDtl.Carrier}}</td>
+					<td>
+						<select>
+							<option ng-repeat="CarrDtl in CarrDtls" value={{CarrDtl.CarrName}}>{{CarrDtl.CarrName}}</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
+	  
+		<div ng-show="page === 'second'">
+		<br>
+			<table id="customers">
+				<tr>
+					<th>Carrier Name</th>
+					<th>Rating</th>
+					<th>Visualization</th>
+					<th>City Service List</th>
+				</tr>			
+				<tr ng-repeat="CarrDtl in CarrDtls">
+					<td>{{CarrDtl.CarrName}}</td>
+					<td>{{CarrDtl.Rating}}</td>
+					<td><span class="stars alignleft"><span ng-style="{'width': getStars({{CarrDtl.Rating}})}"></span></span></td>
+					<td>{{CarrDtl.CityList}}</td>
+				</tr>
+			<table>
+		</div> 
 	</body>
 </html>

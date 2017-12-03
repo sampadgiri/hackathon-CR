@@ -1,5 +1,5 @@
-[{ "CarrName":"BlueDart", "Rating":"4.5"},
- { "CarrName":"DTDC", "Rating":"4"},
- { "CarrName":"Aramex", "Rating":"3.5"},
- { "CarrName":"Fedex", "Rating":"3"},
- { "CarrName":"DHL", "Rating":"2.5"}]
+[{ "CarrName":"BlueDart", "Rating":"4.5", "CityList":"Bhubaneswar, Delhi, Mumbai"},
+ { "CarrName":"DTDC", "Rating":"4.3", "CityList":"Bhubaneswar, Delhi, Mumbai"},
+ { "CarrName":"Aramex", "Rating":"3.6", "CityList":"Bhubaneswar, Delhi"},
+ { "CarrName":"Fedex", "Rating":"3.3", "CityList":"Delhi, Mumbai"},
+ { "CarrName":"DHL", "Rating":"2.8", "CityList":"Bhubaneswar, Delhi, Mumbai"}]

@@ -1,4 +1,4 @@
-[{ "CustName":"Anubhab Mondal", "OrderNo":"OR101", "CustType":"Premium", "Carrier":"BlueDart"},
- { "CustName":"Ravi Kant Pandey", "OrderNo":"OR102", "CustType":"Normal", "Carrier":"DTDC"},
- { "CustName":"Subrat Panda", "OrderNo":"OR103", "CustType":"Normal", "Carrier":"Aramex"},
- { "CustName":"Deepu Biplab", "OrderNo":"OR104", "CustType":"Normal", "Carrier":"BlueDart"}]
+[{ "CustName":"Anubhab Mondal", "OrderNo":"OR101", "City":"Bhubaneswar", "CustType":"Premium", "Carrier":"BlueDart"},
+ { "CustName":"Ravi Kant Pandey", "OrderNo":"OR102","City":"Bhubaneswar", "CustType":"Normal", "Carrier":"DTDC"},
+ { "CustName":"Subrat Panda", "OrderNo":"OR103","City":"Bhubaneswar", "CustType":"Normal", "Carrier":"Aramex"},
+ { "CustName":"Deepu Biplab", "OrderNo":"OR104","City":"Mumbai", "CustType":"Normal", "Carrier":"BlueDart"}]
