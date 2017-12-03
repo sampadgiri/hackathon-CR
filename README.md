@@ -1,2 +1,2 @@
 # hackathon-CR
-Hackathon-Carrier Rating
+AngularJS, Bootstrap, HTML 5, CSS 3
