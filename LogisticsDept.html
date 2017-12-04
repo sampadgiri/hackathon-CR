@@ -3,16 +3,15 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Logistics Dept Portal</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="styleLogDep.css">
-		<script>document.write("<base href=\"" + document.location + "\" />");</script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>			
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="HomeApp.js"></script>
+		<script>document.write("<base href=\"" + document.location + "\" />");</script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
-		<script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+		<link rel="stylesheet" href="styleLogDep.css">
 	</head>
 	<body ng-controller="MainCtrl">		
 
@@ -41,7 +40,7 @@
 					<td>{{OrderDtl.CustType}}</td>
 					<td>
 						<select ng-model="CarrVal" ng-init="CarrVal=OrderDtl.Carrier">
-							<option ng-repeat="CarrDtl in CarrDtls" value="{{CarrDtl.CarrName}}">{{CarrDtl.CarrName}}</option>
+							<option ng-repeat="CarrDtl in CarrDtls | unique: 'CarrName'" value="{{CarrDtl.CarrName}}">{{CarrDtl.CarrName}}</option>
 						</select>&emsp;
 						<a href="#" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-floppy-disk"></span></a>
 					</td>
@@ -50,19 +49,24 @@
 		</div>
 	  
 		<div ng-show="page === 'second'">
-		<br><br>
+		<br>
+		Carrier servicing
+		<select id="CitySel" ng-model="CityVal">
+			<option value="">City</option>
+			<option ng-repeat="CarrDtl in CarrDtls | unique: 'City' | orderBy : 'City'" value="{{CarrDtl.City}}">{{CarrDtl.City}}</option>
+		</select>
 			<table id="customers">
 				<tr>
 					<th>Carrier Name</th>
-					<th>Rating</th>
+					<th>City Rating</th>
 					<th>Visualization</th>
-					<th>City Service List</th>
+					<th>Servicing City</th>
 				</tr>			
-				<tr ng-repeat="CarrDtl in CarrDtls">
+				<tr ng-repeat="CarrDtl in CarrDtls | orderBy : '-Rating'">
 					<td>{{CarrDtl.CarrName}}</td>
 					<td>{{CarrDtl.Rating}}</td>
 					<td><span class="stars alignleft"><span ng-style="{'width': getStars({{CarrDtl.Rating}})}"></span></span></td>
-					<td>{{CarrDtl.CityList}}</td>
+					<td>{{CarrDtl.City}}</td>
 				</tr>
 			<table>
 		</div> 
