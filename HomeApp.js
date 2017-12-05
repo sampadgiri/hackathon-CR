@@ -14,7 +14,40 @@
 			var val = parseFloat(rating);
 			var size = val/5*100;
 			return size + '%';
+			};
+			
+	   $scope.checkAvailability=function(carrierName,city){
+			  var found=false;
+			  angular.forEach($scope.CarrDtls, function(obj){
+     
+     
+                if(obj.CarrName===carrierName && obj.City===city){
+                           found=true;
+                       }
+                 });
+			
+	          return found;		
+			};
+			
+			
+		$scope.onCitySelect=function(city){
+			var carrDetailsForCity=[];
+			if(city===""){
+			$scope.filteredCarrDtls=angular.copy($scope.CarrDtls);
 			}
+			else{
+			angular.forEach($scope.CarrDtls, function(obj){
+    
+                if(obj.City===city){
+                       carrDetailsForCity.push(obj);   
+                       }
+                 });
+			$scope.filteredCarrDtls=carrDetailsForCity;
+			}
+	         // return carrDetailsForCity;		
+			};
+			
+			$scope.filteredCarrDtls=angular.copy($scope.CarrDtls);
 	});
 	App.filter('unique', function() {
 		return function(input, key) {
