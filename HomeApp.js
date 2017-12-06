@@ -17,16 +17,16 @@
 			};
 			
 	   $scope.checkAvailability=function(carrierName,city){
-			  var found=false;
+			  var notfound=true;
 			  angular.forEach($scope.CarrDtls, function(obj){
      
      
                 if(obj.CarrName===carrierName && obj.City===city){
-                           found=true;
+                           notfound=false;
                        }
                  });
 			
-	          return found;		
+	          return notfound;		
 			};
 			
 			
