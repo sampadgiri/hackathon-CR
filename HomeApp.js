@@ -9,6 +9,7 @@
 		$http.get('CarrDtls.json')
 		   .then(function(res){
 			  $scope.CarrDtls = res.data; 
+			  $scope.filteredCarrDtls=angular.copy($scope.CarrDtls);
 			});
 		$scope.getStars = function(rating){
 			var val = parseFloat(rating);
