@@ -1,1 +1,35 @@
 
+<body ng-controller="userCtrl">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <span class="loggedInUser"> {{userName}} <img src="user/user.png"></span>
+    </nav>
+    <div class="container-fluid">
+        <div class="cartItems row">
+            <div class="cart">Items in your cart </div>
+            <div>Location:</div>
+            <div>
+                <select class="form-control location" ng-model="selected" ng-change="switchLocation()">
+                    <option value="" disabled selected>--Select--</option>
+                    <option>BBSR</option>
+                    <option>DELHI</option>
+                    <option>MUMBAI</option>
+                    <option>BENGALURU</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="baseDiv" ng-repeat="product in productsToBuy">
+            <div class="imageDiv col-sm-4 col-md-4 col-lg-4"><img src="{{product.imageSrc}}"></div>
+            <div class="prodName col-sm-4 col-md-4 col-lg-4"> {{product.productName}}</div>
+                        <div class="prodName col-sm-4 col-md-4 col-lg-4"> {{product.price | currency:"INR":true}}</div>
+
+             </div>
+    <hr>
+    <div><button class="checkout btn btn-primary" ng-click="submitReq()"> Checkout </button> </div>
+
+    <!--<nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <span> Copyright@Team Carrier Rating</span>
+    </nav>-->
+
+
+</body>
