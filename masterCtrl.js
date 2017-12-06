@@ -15,8 +15,8 @@ dodApp.config (function($routeProvider){
         templateUrl:"user/user.html",
         controller:"userCtrl"
     })
-    .when("/admin",{
-        templateUrl:"admin/LogisticsDept.html",
-        controller:"MainCtrl"
-    })
+    // .when("/admin",{
+    //     templateUrl:"admin/LogisticsDept.html",
+    //     controller:"MainCtrl"
+    // })
 })
