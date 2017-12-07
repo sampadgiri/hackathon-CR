@@ -7,6 +7,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>			
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script src="dirPagination.js"></script>
 		<script src="HomeApp.js"></script>
 		<script>document.write("<base href=\"" + document.location + "\" />");</script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -34,7 +35,7 @@
 					<th>Customer Type</th>
 					<th>Carrier</th>
 				</tr>	
-				<tr ng-repeat="OrderDtl in OrderDtls">
+				<tr dir-paginate="OrderDtl in OrderDtls | itemsPerPage:2" current-page="currentPage"  pagination-id="order">
 					<td>{{OrderDtl.CustName}}</td>
 					<td>{{OrderDtl.OrderNo}}</td>
 					<td>{{OrderDtl.City}}</td>
@@ -43,10 +44,13 @@
 						<select ng-model="CarrVal" ng-init="CarrVal=OrderDtl.Carrier"  name="{{OrderDtl.OrderNo}}">
 							<option ng-repeat="CarrDtl in CarrDtls | unique: 'CarrName'" value="{{CarrDtl.CarrName}}" ng-disabled="checkAvailability(CarrDtl.CarrName,OrderDtl.City)">{{CarrDtl.CarrName}}</option>
 						</select>&emsp;
-						<a href="#" class="btn btn-primary btn-xs"  ng-disabled="orderDetailsForm.{{OrderDtl.OrderNo}}.$pristine"><span class="glyphicon glyphicon-floppy-disk"></span></a>
+						<a href="#" class="btn btn-primary btn-xs"  ng-disabled="orderDetailsForm.{{OrderDtl.OrderNo}}.$pristine" ng-click="changeCarrier(CarrVal,OrderDtl)"><span class="glyphicon glyphicon-floppy-disk"></span></a>
 					</td>
 				</tr>
 			</table>
+			<dir-pagination-controls  max-size="12"  direction-links="true" boundary-links="true"
+                template-url="dirPagination.tpl.html" pagination-id="order">      
+             </dir-pagination-controls>
 			</form>
 		</div>
 	  
@@ -54,23 +58,26 @@
 		<br>
 		Carrier servicing
 		<select id="CitySel" ng-model="CityVal" ng-change="onCitySelect(CityVal)">
-			<option value="">City</option>
-			<option ng-repeat="CarrDtl in CarrDtls | unique: 'City' | orderBy : 'City'" value="{{CarrDtl.City}}">{{CarrDtl.City}}</option>
+			 <option value="">Select City</option>
+			<option ng-repeat="CarrDtl in CarrDtls | unique: 'City' | orderBy : 'City'" value="{{CarrDtl.City}}" >{{CarrDtl.City}}</option>
 		</select>
-			<table id="customers">
+			<table id="customers" ng-if="filteredCarrDtls">
 				<tr>
 					<th>Carrier Name</th>
 					<th>City Rating</th>
 					<th>Visualization</th>
 					<th>Servicing City</th>
 				</tr>			
-				<tr ng-repeat="CarrDtl in filteredCarrDtls | orderBy : '-Rating'">
+				<tr dir-paginate="CarrDtl in filteredCarrDtls | orderBy : '-Rating'| itemsPerPage:2" pagination-id="carrier"  current-page="currentPage">
 					<td>{{CarrDtl.CarrName}}</td>
 					<td>{{CarrDtl.Rating}}</td>
 					<td><span class="stars alignleft"><span ng-style="{'width': getStars({{CarrDtl.Rating}})}"></span></span></td>
 					<td>{{CarrDtl.City}}</td>
 				</tr>
-			<table>
+			</table>
+			<dir-pagination-controls  max-size="12"  direction-links="true" boundary-links="true" ng-if="filteredCarrDtls"
+                template-url="dirPagination.tpl.html" pagination-id="carrier">      
+             </dir-pagination-controls>
 		</div> 
 
 	</body>
