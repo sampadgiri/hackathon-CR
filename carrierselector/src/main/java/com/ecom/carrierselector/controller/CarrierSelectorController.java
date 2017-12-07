@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,6 +54,15 @@ public class CarrierSelectorController {
 			xpd.setCity(city);
 		result.put("xpo", xpd);
 		result.put("other", cd);
+		return result;
+	}
+	
+	@RequestMapping(value="/placeOrder", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> placeOrder(@RequestBody OrderDetails order){
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", HttpStatus.OK.value());
+		result.put("message", "Success!");
+		result.put("orderid", carrierService.placeOrder(order));
 		return result;
 	}
 }

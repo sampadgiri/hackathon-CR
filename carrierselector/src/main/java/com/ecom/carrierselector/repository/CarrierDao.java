@@ -1,5 +1,7 @@
 package com.ecom.carrierselector.repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -7,8 +9,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.ecom.carrierselector.domain.CarrierDetails;
@@ -98,5 +103,23 @@ public class CarrierDao {
 					}
 
 				});
+	}
+	
+	public String placeOrder(OrderDetails order) {
+		KeyHolder kh = new GeneratedKeyHolder();
+		String query = "INSERT INOT ORDER_DETAILS (ORDER_NMBR, CUST_NAME, CITY, CUST_TYPE, CARRIER, STATUS) VALUES('OR'||LPAD(ORDER_NUMBER.NEXTVAL,3,'0'),?,?,?,?,'CREATED')";
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(query, new String[] {"ORDER_NMBR"});
+				ps.setString(1, order.getCustName());
+				ps.setString(2, order.getCity());
+				ps.setString(3, order.getCustType());
+				ps.setString(4, order.getCarrierName());
+				return ps;
+			}
+		}, kh);
+		return kh.getKey().toString();
 	}
 }

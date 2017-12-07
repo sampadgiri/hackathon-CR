@@ -30,5 +30,9 @@ public class CarrierServiceImpl implements CarrierService {
 	public XPODetails getXPODetailsByCity(String city) {
 		return carrierDao.getXPODetailsByCity(city);
 	}
+	@Override
+	public String placeOrder(OrderDetails order) {
+		return carrierDao.placeOrder(order);
+	}
 
 }
