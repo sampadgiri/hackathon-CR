@@ -1,5 +1,6 @@
 body {
-    background-color: rgba(221,221,223,0.5);
+    background-image: url("theme.jpg");
+    background-repeat: repeat;
 }
 
 .container-fluid {
@@ -9,7 +10,8 @@ body {
 
 .navbar span{
     color: white;
-    font-weight: bold;
+    font-weight: normal;
+    font-size: 23px;
     float: right;
 }
 
