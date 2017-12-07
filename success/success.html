@@ -1,1 +1,17 @@
-
+<head>
+    <style>
+div{
+    text-align :center;
+    margin-top:100px;
+}
+    </style>
+</head>
+<body ng-controller="successCtrl">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <span class="loggedInUser"> {{userName}} <img src="user/user.png"></span>
+    </nav>
+    <div>
+    <h1> Order Placed Successfully </h1>
+    <button type="button" class="btn btn-primary" ng-click="goToInbox()">Go To Login</button>
+    </div>
+ <body>
