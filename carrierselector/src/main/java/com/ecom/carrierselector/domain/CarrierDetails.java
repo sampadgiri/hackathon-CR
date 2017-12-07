@@ -1,25 +1,46 @@
 package com.ecom.carrierselector.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CarrierDetails {
-	private int id;
-	private String carrierName;
-	private double carrierRating;
-	public int getId() {
-		return id;
+	private String City;
+	private String CarrName;
+	private double Rating;
+	private int Capacity;
+	private int available;
+	@JsonProperty(value="City")
+	public String getCity() {
+		return City;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCity(String city) {
+		City = city;
 	}
-	public String getCarrierName() {
-		return carrierName;
+	@JsonProperty(value="CarrName")
+	public String getCarrName() {
+		return CarrName;
 	}
-	public void setCarrierName(String carrierName) {
-		this.carrierName = carrierName;
+	public void setCarrName(String carrName) {
+		CarrName = carrName;
 	}
-	public double getCarrierRating() {
-		return carrierRating;
+	@JsonProperty(value="Rating")
+	public double getRating() {
+		return Rating;
 	}
-	public void setCarrierRating(double carrierRating) {
-		this.carrierRating = carrierRating;
+	public void setRating(double rating) {
+		Rating = rating;
+	}
+	@JsonProperty(value="Capacity")
+	public int getCapacity() {
+		return Capacity;
+	}
+	public void setCapacity(int capacity) {
+		Capacity = capacity;
+	}
+	@JsonProperty(value="Available")
+	public int getAvailable() {
+		return available;
+	}
+	public void setAvailable(int available) {
+		this.available = available;
 	}
 }
