@@ -12,9 +12,11 @@ dodApp.controller('loginCtrl', function ($scope, $http, $window) {
                 isValidated = true;
 
                 if (eachOption.role == 'admin') {
-                    // $window.location.href = '#!/admin'
+                    $window.location.href = '#!/admin'
                 } else {
-                    sessionStorage.setItem('userDetails',JSON.stringify(username));
+                    sessionStorage.setItem('userName',JSON.stringify(username));
+                    sessionStorage.setItem('userPriority',JSON.stringify(eachOption.priority));
+
                     if (eachOption.priority == 'prime') {
                         $window.location.href = '#!/user'
 
