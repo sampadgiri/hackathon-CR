@@ -2,19 +2,19 @@
     "userName":"user1",
     "password":"user1",
     "role":"customer",
-    "priority":"prime"
+    "priority":"Premium"
 },
 {
     "userName":"user2",
     "password":"user2",
     "role":"customer",
-    "priority":"nonPrime"
+    "priority":"Normal"
 },
 {
     "userName":"user3",
     "password":"user3",
     "role":"customer",
-    "priority":"nonPrime"
+    "priority":"Normal"
 },
 {
     "userName":"admin1",
