@@ -1,7 +1,7 @@
 // (function() {
 // 	'use strict';
 	
-	dodApp.controller('MainCtrl', function($scope, $http, $window) {
+	dodApp.controller('MainCtrl',['$scope','$http','$window','AppConstant', function($scope, $http, $window,AppConstant) {
 	$scope.userName = JSON.parse(sessionStorage.getItem('userName'));
 
 	$scope.currentPage = 1;
@@ -60,7 +60,7 @@
 			  //$scope.filteredCarrDtls=angular.copy($scope.CarrDtls);
 			});
 		}	
-	});
+	}]);
 	dodApp.filter('unique', function() {
 		return function(input, key) {
 			var unique = {};

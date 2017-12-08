@@ -27,4 +27,10 @@ dodApp.config (function($routeProvider){
         templateUrl:"failure/failure.html",
         controller:"failureCtrl"
     })
+});
+
+dodApp.constant("AppConstant",{
+url :"http://10.118.131.25:8085/"
+
+
 })
