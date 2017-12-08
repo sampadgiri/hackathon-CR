@@ -43,7 +43,8 @@ END;
 create or replace PROCEDURE carr_rtg_proc_inst
 	(v_custName IN order_details.cust_name%TYPE,
 	v_city IN order_details.city%TYPE,
-	v_custType IN order_details.cust_type%TYPE)
+	v_custType IN order_details.cust_type%TYPE,
+  o_orderId OUT order_details.order_nmbr%TYPE)
 IS
 	v_defCarr	order_details.carrier%TYPE := 'XPO Logistics';
 	v_carrier	order_details.carrier%TYPE;
@@ -71,10 +72,9 @@ BEGIN
 		END IF;
 		v_stat := 'CREATED';
 	END IF;
-
+  o_orderId := CONCAT(CONCAT('OR',TO_CHAR(sysdate,'DDMMYY')),LPAD(ordernum_seq.nextval,4,'0'));
 	INSERT INTO order_details (ORDER_NMBR, CUST_NAME, CITY, CUST_TYPE, CARRIER, STATUS) VALUES(
-	CONCAT(CONCAT('OR',TO_CHAR(sysdate,'DDMMYY')),LPAD(ordernum_seq.nextval,4,'0')),
-	v_custName,v_city,v_custType,v_carrier,v_stat);
+	o_orderId,v_custName,v_city,v_custType,v_carrier,v_stat);
 
 	UPDATE carrier_details SET capacity = capacity - 1 WHERE 
 	city = v_city AND carrier_name = v_carrier;
