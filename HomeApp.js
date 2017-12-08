@@ -1,7 +1,9 @@
-(function() {
-	'use strict';
+// (function() {
+// 	'use strict';
 	
-	dodApp.controller('MainCtrl', function($scope, $http) {
+	dodApp.controller('MainCtrl', function($scope, $http, $window) {
+	$scope.userName = JSON.parse(sessionStorage.getItem('userName'));
+
 	$scope.currentPage = 1;
 		$http.get('OrderDtls.json')
 		   .then(function(res){
@@ -30,6 +32,10 @@
 			
 	          return notfound;		
 			};
+
+			$scope.goToInbox = function () {
+        $window.location.href = '#!/login'
+     }
 			
 			
 		$scope.onCitySelect=function(city){
@@ -59,13 +65,19 @@
 		return function(input, key) {
 			var unique = {};
 			var uniqueList = [];
-			for(var i = 0; i < input.length; i++){
+			if(input != undefined) {
+	for(var i = 0; i < input.length; i++){
 				if(typeof unique[input[i][key]] == "undefined"){
 					unique[input[i][key]] = "";
 					uniqueList.push(input[i]);
 				}
 			}
+			}
+		
 			return uniqueList;
 		};
+		
 	});
-})();
+
+	
+// })();
