@@ -5,7 +5,7 @@
 	$scope.userName = JSON.parse(sessionStorage.getItem('userName'));
 
 	$scope.currentPage = 1;
-		$http.get('OrderDtls.json')
+		$http.get(AppConstant.url+"getAllOrders")
 		   .then(function(res){
 			  $scope.OrderDtls = res.data;                
 			});
