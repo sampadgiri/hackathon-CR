@@ -1,4 +1,5 @@
-dodApp.controller('userCtrl',function($scope,$http,$window){
+    	dodApp.controller('userCtrl',['$scope','$http','$window','AppConstant', function($scope, $http, $window,AppConstant) {
+
 
     $http.get('user/user.json').then(function (res) {
         $scope.productsToBuy = res.data;
@@ -10,14 +11,14 @@ dodApp.controller('userCtrl',function($scope,$http,$window){
           $scope.location = $scope.selected;
      }
      $scope.submitReq = function () {
-         console.log($scope.userName);
-         console.log($scope.location);
-         console.log($scope.userPriority);
-        //  var data = {};
-        //  dataObj.userName = $scope.userName;
-        //  dataObj.location = $scope.location;
-        //  dataObj.userPriority = $scope.userPriority;
-        //  var response = $http.post(url,dataObj);
+        //  console.log($scope.userName);
+        //  console.log($scope.location);
+        //  console.log($scope.userPriority);
+         var dataObj = {};
+         dataObj.CustName = $scope.userName;
+         dataObj.City = $scope.location;
+         dataObj.CustType = $scope.userPriority;
+        //  var response = $http.post(AppConstant.url+"/placeOrder",JSON.stringify(dataObj));
         //  response.success(function (data,status,headers,config) {
         //               $window.location.href = '#!/success'
 
@@ -26,7 +27,16 @@ dodApp.controller('userCtrl',function($scope,$http,$window){
         //               $window.location.href = '#!/failure';
 
         //  });
-         $window.location.href = '#!/success'
+
+         $http.post(AppConstant.url+"placeOrder",JSON.stringify(dataObj))
+		   .then(function(res){
+               sessionStorage.setItem('orderIdDetais',res.data.orderid);
+			  $window.location.href = '#!/success'               
+			},function(res){
+			  $window.location.href = '#!/failure'               
+			});
+
+        //  $window.location.href = '#!/success'
         // $window.location.href = '#!/failure';
      }
-})
+}])
