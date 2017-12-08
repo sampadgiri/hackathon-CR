@@ -58,7 +58,7 @@
 					<th>Visualization</th>
 					<th>Servicing City</th>
 				</tr>			
-				<tr dir-paginate="CarrDtl in filteredCarrDtls | orderBy : '-Rating'| itemsPerPage:2" pagination-id="carrier"  current-page="currentPage">
+				<tr ng-class="{'bold-font': $index==0}" dir-paginate="CarrDtl in filteredCarrDtls | orderBy : '-Rating' | orderBy : '-CarrName' | itemsPerPage:2  track by $index" pagination-id="carrier"  current-page="currentPage">
 					<td>{{CarrDtl.CarrName}}</td>
 					<td>{{CarrDtl.Rating}}</td>
 					<td><span class="stars alignleft"><span ng-style="{'width': getStars({{CarrDtl.Rating}})}"></span></span></td>
