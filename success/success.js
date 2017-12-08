@@ -1,5 +1,5 @@
 dodApp.controller('successCtrl',function($scope,$http,$window){
-        $scope.userName = JSON.parse(sessionStorage.getItem('userDetails'));
+        $scope.userName = JSON.parse(sessionStorage.getItem('userName'));
 
 
      $scope.goToInbox = function () {
