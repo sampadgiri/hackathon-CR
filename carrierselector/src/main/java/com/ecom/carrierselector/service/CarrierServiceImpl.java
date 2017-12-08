@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ecom.carrierselector.domain.CarrierDetails;
 import com.ecom.carrierselector.domain.OrderDetails;
 import com.ecom.carrierselector.domain.PlaceOrder;
+import com.ecom.carrierselector.domain.UpdateOrder;
 import com.ecom.carrierselector.domain.XPODetails;
 import com.ecom.carrierselector.repository.CarrierDao;
 
@@ -35,6 +36,14 @@ public class CarrierServiceImpl implements CarrierService {
 	public String placeOrder(PlaceOrder order) {
 		return carrierDao.placeOrder(order);
 		//return null;
+	}
+	@Override
+	public List<String> getAllCities() {
+		return carrierDao.getAllCities();
+	}
+	@Override
+	public void updateOrder(UpdateOrder order) {
+		carrierDao.updateOrder(order);
 	}
 
 }

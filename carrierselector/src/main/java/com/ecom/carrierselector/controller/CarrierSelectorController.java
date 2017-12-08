@@ -1,5 +1,6 @@
 package com.ecom.carrierselector.controller;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecom.carrierselector.domain.CarrierDetails;
 import com.ecom.carrierselector.domain.OrderDetails;
 import com.ecom.carrierselector.domain.PlaceOrder;
+import com.ecom.carrierselector.domain.UpdateOrder;
 import com.ecom.carrierselector.domain.XPODetails;
 import com.ecom.carrierselector.exception.CSException;
 import com.ecom.carrierselector.service.CarrierService;
@@ -60,18 +62,26 @@ public class CarrierSelectorController {
 		return result;
 	}
 
-	//@RequestMapping(value="/placeOrder/{cust}/{city}/{type}", method=RequestMethod.GET)
 	@RequestMapping(value="/placeOrder", method=RequestMethod.POST, consumes="application/json", produces="application/json")
 	public @ResponseBody Map<String, Object> placeOrder(@RequestBody PlaceOrder order){
-	//public @ResponseBody Map<String, Object> placeOrder(@PathVariable("cust") String cust, @PathVariable("city") String city, @PathVariable("type") String type){
-		/*OrderDetails order = new OrderDetails();
-		order.setCustName(cust);
-		order.setCity(city);
-		order.setCustType(type);*/
 		Map<String, Object> result = new HashMap<>();
 		result.put("status", HttpStatus.OK.value());
 		result.put("message", "Success!");
 		result.put("orderid", carrierService.placeOrder(order));
 		return result;
+	}
+	
+	@RequestMapping(value="/updateOrder", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+	public @ResponseBody Map<String, Object> updateOrder(@RequestBody UpdateOrder order) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", HttpStatus.OK.value());
+		result.put("message", "Success!");
+		carrierService.updateOrder(order);
+		return result;
+	}
+	
+	@RequestMapping(value="/getAllCities")
+	public @ResponseBody List<String> getAllCities(){
+		return carrierService.getAllCities();
 	}
 }

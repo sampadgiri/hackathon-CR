@@ -1,7 +1,5 @@
 package com.ecom.carrierselector.repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -9,16 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.ecom.carrierselector.domain.CarrierDetails;
 import com.ecom.carrierselector.domain.OrderDetails;
 import com.ecom.carrierselector.domain.PlaceOrder;
+import com.ecom.carrierselector.domain.UpdateOrder;
 import com.ecom.carrierselector.domain.XPODetails;
 
 @Repository
@@ -35,6 +31,7 @@ public class CarrierDao {
 				cd.setCity(rs.getString("CITY"));
 				cd.setCarrName(rs.getString("CARRIER_NAME"));
 				cd.setRating(rs.getDouble("CARRIER_RATING"));
+				cd.setCapacity(rs.getInt("CAPACITY"));
 				return cd;
 			}
 
@@ -97,5 +94,19 @@ public class CarrierDao {
 	public String placeOrder(PlaceOrder order) {
 		PlaceOrderProcedure pOrder = new PlaceOrderProcedure(jdbcTemplate, "carr_rtg_proc_inst");
 		return pOrder.insertRecord(order.getCustName(), order.getCity(), order.getCustType());
+	}
+	
+	public List<String> getAllCities() {
+		return jdbcTemplate.query("SELECT DISTINCT CITY FROM CARRIER_DETAILS", new RowMapper<String>() {
+
+			@Override
+			public String mapRow(ResultSet rs, int cnt) throws SQLException {
+				return rs.getString(1);
+			}});
+	}
+	
+	public void updateOrder(UpdateOrder order) {
+		UpdateOrderProcedure uProcedure = new UpdateOrderProcedure(jdbcTemplate, "carr_rtg_proc_updt");
+		uProcedure.update(order.getOrderNumber(), order.getCity(), order.getPrevCarrier(), order.getCarrier());
 	}
 }
