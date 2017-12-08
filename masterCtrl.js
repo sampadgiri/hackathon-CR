@@ -1,6 +1,6 @@
 'use strict';
 
-var dodApp = angular.module("myApp",["ngRoute"]);
+var dodApp = angular.module("myApp",["ngRoute","angularUtils.directives.dirPagination"]);
 
 dodApp.config (function($routeProvider){
     $routeProvider.when("/",{
