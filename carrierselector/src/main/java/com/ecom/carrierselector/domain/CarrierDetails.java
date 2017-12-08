@@ -7,7 +7,6 @@ public class CarrierDetails {
 	private String CarrName;
 	private double Rating;
 	private int Capacity;
-	private int available;
 	@JsonProperty(value="City")
 	public String getCity() {
 		return City;
@@ -35,12 +34,5 @@ public class CarrierDetails {
 	}
 	public void setCapacity(int capacity) {
 		Capacity = capacity;
-	}
-	@JsonProperty(value="Available")
-	public int getAvailable() {
-		return available;
-	}
-	public void setAvailable(int available) {
-		this.available = available;
 	}
 }

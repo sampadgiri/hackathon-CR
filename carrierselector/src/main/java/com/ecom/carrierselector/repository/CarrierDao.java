@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ecom.carrierselector.domain.CarrierDetails;
 import com.ecom.carrierselector.domain.OrderDetails;
+import com.ecom.carrierselector.domain.PlaceOrder;
 import com.ecom.carrierselector.domain.XPODetails;
 
 @Repository
@@ -41,11 +42,8 @@ public class CarrierDao {
 	}
 
 	public List<CarrierDetails> getCarriersByCity(String city) {
-
-		// return jdbcTemplate.query("SELECT * FROM CARRIER_DETAILS WHERE CITY=?", new
-		// Object[] { city },
 		return jdbcTemplate.query(
-				"SELECT C.CITY AS CITY, C.CARRIER_NAME AS CARRIER_NAME, C.CARRIER_RATING AS CARRIER_RATING, C.CAPACITY AS CAPACITY, O.USED AS USED FROM CARRIER_DETAILS C LEFT OUTER JOIN (SELECT CITY, CARRIER, COUNT(1) AS USED FROM ORDER_DETAILS WHERE STATUS<>'DELIVERED' GROUP BY CITY, CARRIER) O ON C.CITY=O.CITY AND C.CARRIER_NAME = O.CARRIER WHERE C.CITY=?",
+				"SELECT * FROM CARRIER_DETAILS WHERE CARRIER_NAME<>'XPO Logistics' AND CITY=?",
 				new Object[] { city }, new RowMapper<CarrierDetails>() {
 
 					@Override
@@ -55,13 +53,6 @@ public class CarrierDao {
 						cd.setCarrName(rs.getString("CARRIER_NAME"));
 						cd.setRating(rs.getDouble("CARRIER_RATING"));
 						cd.setCapacity(rs.getInt("CAPACITY"));
-						int used = 0;
-						try {
-							used = rs.getInt("USED");
-						}catch(SQLException se) {
-							
-						}
-						cd.setAvailable(cd.getCapacity()-used);
 						return cd;
 					}
 
@@ -87,17 +78,15 @@ public class CarrierDao {
 
 	public XPODetails getXPODetailsByCity(String city) {
 		return jdbcTemplate.query(
-				"SELECT CITY, NO_OF_VEHICALS, CAPACITY, (NO_OF_VEHICALS*CAPACITY-(SELECT COUNT(1) FROM ORDER_DETAILS WHERE STATUS<>'DELIVERED' AND CARRIER='XPO' AND CITY=?)) AS AVAILABLE FROM XPO_DETAILS WHERE CITY=?",
-				new Object[] { city, city }, new ResultSetExtractor<XPODetails>() {
+				"SELECT * FROM CARRIER_DETAILS WHERE CARRIER_NAME='XPO Logistics' AND CITY=?",
+				new Object[] { city }, new ResultSetExtractor<XPODetails>() {
 
 					@Override
 					public XPODetails extractData(ResultSet rs) throws SQLException, DataAccessException {
 						XPODetails xd = new XPODetails();
 						while (rs.next()) {
 							xd.setCity(rs.getString("CITY"));
-							xd.setVehicalCount(rs.getInt("NO_OF_VEHICALS"));
 							xd.setCapacity(rs.getInt("CAPACITY"));
-							xd.setAvailable(rs.getInt("AVAILABLE"));
 						}
 						return xd;
 					}
@@ -105,21 +94,8 @@ public class CarrierDao {
 				});
 	}
 	
-	public String placeOrder(OrderDetails order) {
-		KeyHolder kh = new GeneratedKeyHolder();
-		String query = "INSERT INOT ORDER_DETAILS (ORDER_NMBR, CUST_NAME, CITY, CUST_TYPE, CARRIER, STATUS) VALUES('OR'||LPAD(ORDER_NUMBER.NEXTVAL,3,'0'),?,?,?,?,'CREATED')";
-		jdbcTemplate.update(new PreparedStatementCreator() {
-			
-			@Override
-			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-				PreparedStatement ps = con.prepareStatement(query, new String[] {"ORDER_NMBR"});
-				ps.setString(1, order.getCustName());
-				ps.setString(2, order.getCity());
-				ps.setString(3, order.getCustType());
-				ps.setString(4, order.getCarrierName());
-				return ps;
-			}
-		}, kh);
-		return kh.getKey().toString();
+	public String placeOrder(PlaceOrder order) {
+		PlaceOrderProcedure pOrder = new PlaceOrderProcedure(jdbcTemplate, "carr_rtg_proc_inst");
+		return pOrder.insertRecord(order.getCustName(), order.getCity(), order.getCustType());
 	}
 }
