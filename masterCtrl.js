@@ -1,6 +1,6 @@
 'use strict';
 
-var dodApp = angular.module("myApp",["ngRoute","angularUtils.directives.dirPagination"]);
+var dodApp = angular.module("myApp",["ngRoute"]);
 
 dodApp.config (function($routeProvider){
     $routeProvider.when("/",{
@@ -22,5 +22,9 @@ dodApp.config (function($routeProvider){
     .when("/success",{
         templateUrl:"success/success.html",
         controller:"successCtrl"
+    })
+    .when("/failure",{
+        templateUrl:"failure/failure.html",
+        controller:"failureCtrl"
     })
 })
