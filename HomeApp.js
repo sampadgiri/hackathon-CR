@@ -52,13 +52,24 @@
 	         // return carrDetailsForCity;		
 			};
 		$scope.changeCarrier=function(CarrVal,OrderDtl){
-		$http.post('/ChangeCarrier',{OrderNo:OrderDtl.OrderNo,Carrier:CarrVal})
+		$http.post(AppConstant.url+"updateOrder",{"orderNumber":OrderDtl.OrderNo,"carrier":CarrVal,"prevCarrier":OrderDtl.Carrier,"city":OrderDtl.City})
 		   .then(function(res){
 			  alert(res.data.status); 
-			  //$scope.onCitySelect($scope.CarrDtls[1].City);
-			 // $scope.CityVal=$scope.CarrDtls[1];
-			  //$scope.filteredCarrDtls=angular.copy($scope.CarrDtls);
+			  $http.get(AppConstant.url+"getAllOrders")
+		   .then(function(res){
+			  $scope.OrderDtls = res.data;                
 			});
+			
+			},
+			function(res){
+			  alert("Error updating carrier"); 
+			 
+			
+			}
+			
+			
+			
+			);
 		}	
 	}]);
 	dodApp.filter('unique', function() {
