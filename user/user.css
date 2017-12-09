@@ -4,7 +4,7 @@ body {
 }
 
 .container-fluid {
-    padding-left: 450px;
+    padding-left: 350px;
     padding-right: 250px;
 }
 
@@ -51,6 +51,8 @@ body {
 }
 .cart {
     margin-right: 450px;
+        min-width: 190px;
+    text-align: center;
 }
 .imageDiv, .prodName, .prodPrice {
     display: inline-block;

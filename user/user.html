@@ -8,15 +8,22 @@
             <div class="cart">Items in your cart </div>
             <div>Location:</div>
             <div>
-                <select class="form-control location" ng-model="selected" ng-change="switchLocation()">
+               <!--  <select class="form-control location" ng-model="selected" ng-change="switchLocation()">
                     <option value="" disabled selected>--Select--</option>
                     <option>Bhubaneswar</option>
                     <option>Delhi</option>
-                    <!--<option>KOLKATA</option>-->
+                    <option>Kolkata</option>
 
                     <option>Mumbai</option>
-                    <!--<option>BANGALORE</option>-->
-                </select>
+                    <option></option
+                </select> -->
+                
+                
+                <select ng-model="selected"  ng-change="switchLocation()">
+                <option value="" selected>Select City</option>
+                
+							<option ng-repeat="city in cities" value="{{city}}" >{{city}}</option>
+						</select>
             </div>
 
         </div>

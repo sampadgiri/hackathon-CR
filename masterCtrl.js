@@ -30,7 +30,7 @@ dodApp.config (function($routeProvider){
 });
 
 dodApp.constant("AppConstant",{
-url :"http://10.118.131.25:8085/"
+url :"http://localhost:8085/"
 
 
 })

@@ -26,7 +26,7 @@
 					<th>Status</th>
 					<th>Carrier</th>
 				</tr>	
-				<tr dir-paginate="OrderDtl in OrderDtls | itemsPerPage:2" current-page="currentPage"  pagination-id="order">
+				<tr dir-paginate="OrderDtl in OrderDtls | itemsPerPage:5" current-page="currentPage"  pagination-id="order">
 					<td>{{OrderDtl.CustName}}</td>
 					<td>{{OrderDtl.OrderNo}}</td>
 					<td>{{OrderDtl.City}}</td>
@@ -62,7 +62,7 @@
 					<th>Capacity</th>
 					
 				</tr>			
-				<tr ng-class="{'bold-font': CarrDtl.CarrName=="XPO Logistics"}" dir-paginate="CarrDtl in filteredCarrDtls | orderBy : '-Rating' | orderBy : '-CarrName' | itemsPerPage:2  track by $index" pagination-id="carrier"  current-page="currentPage">
+				<tr ng-class="{'bold-font': CarrDtl.CarrName=='XPOLogistics'}" dir-paginate="CarrDtl in filteredCarrDtls | orderBy : '-Rating' | orderBy : '-CarrName' | itemsPerPage:2  track by $index" pagination-id="carrier"  current-page="currentPage">
 					<td>{{CarrDtl.CarrName}}</td>
 					<td>{{CarrDtl.Rating}}</td>
 					<td><span class="stars alignleft"><span ng-style="{'width': getStars({{CarrDtl.Rating}})}"></span></span></td>

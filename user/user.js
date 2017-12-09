@@ -4,12 +4,18 @@
     $http.get('user/user.json').then(function (res) {
         $scope.productsToBuy = res.data;
     });
+    $http.get(AppConstant.url+"getAllCities")
+	   .then(function(res){
+		  $scope.cities = res.data;  
+		 // $scope.selected =   $scope.cities[0];
+		});
     $scope.userName = JSON.parse(sessionStorage.getItem('userName'));
  $scope.userPriority = JSON.parse(sessionStorage.getItem('userPriority'));
 
      $scope.switchLocation = function () {
           $scope.location = $scope.selected;
      }
+   
      $scope.submitReq = function () {
         //  console.log($scope.userName);
         //  console.log($scope.location);
