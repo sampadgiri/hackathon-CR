@@ -7,7 +7,8 @@
 	$scope.currentPage = 1;
 		$http.get(AppConstant.url+"getAllOrders")
 		   .then(function(res){
-			  $scope.OrderDtls = res.data;                
+			  $scope.OrderDtls = res.data;
+			  $scope.OrderDtls = res.data;  
 			});
 		$http.get(AppConstant.url+"getAllCarriers")
 		   .then(function(res){
@@ -19,6 +20,11 @@
 			var size = val/5*100;
 			return size + '%';
 			};
+			
+//			$scope.getCarrValInitial = function(order){
+//				
+//				return order.Carrier;
+//				};
 			
 	   $scope.checkAvailability=function(carrierName,city){
 			  var notfound=true;

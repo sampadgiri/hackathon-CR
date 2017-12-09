@@ -16,8 +16,16 @@
 	  
 		<div ng-show="page === 'first'">
 		<br><br>
+		Status
+		<select id="statusSel" ng-model="selectedStatus" >
+			 <option value="DELIVERED">DELIVERED</option>
+			 <option value="IN-TRANSIT">IN-TRANSIT</option>
+			 <option value="CREATED" >CREATED</option>
+			  <option value="{{undefined}}" selected>ALL</option>
+			
+		</select>
 		    <form name="orderDetailsForm" novalidate>	
-			<table id="customers">
+			<table id="customers" ng-if="OrderDtls">
 				<tr>
 					<th>Customer Name</th>
 					<th>Order Number</th>
@@ -26,7 +34,7 @@
 					<th>Status</th>
 					<th>Carrier</th>
 				</tr>	
-				<tr dir-paginate="OrderDtl in OrderDtls | itemsPerPage:5" current-page="currentPage"  pagination-id="order">
+				<tr dir-paginate="OrderDtl in OrderDtls | filter:  {'Status':selectedStatus } | itemsPerPage:5" current-page="currentPage"  pagination-id="order">
 					<td>{{OrderDtl.CustName}}</td>
 					<td>{{OrderDtl.OrderNo}}</td>
 					<td>{{OrderDtl.City}}</td>
