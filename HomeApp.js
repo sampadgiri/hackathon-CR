@@ -9,7 +9,7 @@
 		   .then(function(res){
 			  $scope.OrderDtls = res.data;                
 			});
-		$http.get('CarrDtls.json')
+		$http.get(AppConstant.url+"getAllCarriers")
 		   .then(function(res){
 			  $scope.CarrDtls = res.data; 
 			  //$scope.filteredCarrDtls=angular.copy($scope.CarrDtls);
@@ -54,7 +54,7 @@
 		$scope.changeCarrier=function(CarrVal,OrderDtl){
 		$http.post(AppConstant.url+"updateOrder",{"orderNumber":OrderDtl.OrderNo,"carrier":CarrVal,"prevCarrier":OrderDtl.Carrier,"city":OrderDtl.City})
 		   .then(function(res){
-			  alert(res.data.status); 
+			  alert("Order Updated Successfully"); 
 			  $http.get(AppConstant.url+"getAllOrders")
 		   .then(function(res){
 			  $scope.OrderDtls = res.data;                
