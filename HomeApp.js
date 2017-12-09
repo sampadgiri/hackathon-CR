@@ -8,7 +8,7 @@
 		$http.get(AppConstant.url+"getAllOrders")
 		   .then(function(res){
 			  $scope.OrderDtls = res.data;
-			  $scope.OrderDtls = res.data;  
+			  
 			});
 		$http.get(AppConstant.url+"getAllCarriers")
 		   .then(function(res){

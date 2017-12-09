@@ -33,18 +33,21 @@
 					<th>Customer Type</th>
 					<th>Status</th>
 					<th>Carrier</th>
+					<th>Change Carrier</th>
 				</tr>	
 				<tr dir-paginate="OrderDtl in OrderDtls | filter:  {'Status':selectedStatus } | itemsPerPage:5" current-page="currentPage"  pagination-id="order">
 					<td>{{OrderDtl.CustName}}</td>
 					<td>{{OrderDtl.OrderNo}}</td>
 					<td>{{OrderDtl.City}}</td>
 					<td>{{OrderDtl.CustType}}</td>
+					<td>{{OrderDtl.Carrier}}</td>
 					<td>{{OrderDtl.Status}}</td>
-					<td>
-						<select ng-model="CarrVal" ng-init="CarrVal=OrderDtl.Carrier"  name="{{OrderDtl.OrderNo}}">
+					<td  >
+					    <span ng-if="OrderDtl.Status!=='CREATED'">NA</span>
+						<select ng-if="OrderDtl.Status=='CREATED'" ng-model="$parent.CarrVal" ng-init="$parent.CarrVal=OrderDtl.Carrier"  name="{{OrderDtl.OrderNo}}">
 							<option ng-repeat="CarrDtl in CarrDtls | unique: 'CarrName'" value="{{CarrDtl.CarrName}}" ng-disabled="checkAvailability(CarrDtl.CarrName,OrderDtl.City)">{{CarrDtl.CarrName}}</option>
 						</select>&emsp;
-						<a  class="btn btn-primary btn-xs" ng-disabled="orderDetailsForm.{{OrderDtl.OrderNo}}.$pristine || OrderDtl.Status=='DELIVERED' ||OrderDtl.Status=='IN-TRANSIT' "  ng-click="changeCarrier(CarrVal,OrderDtl)"><span class="glyphicon glyphicon-floppy-disk"></span></a>
+						<a  ng-if="OrderDtl.Status=='CREATED'" class="btn btn-primary btn-xs" ng-disabled="orderDetailsForm.{{OrderDtl.OrderNo}}.$pristine || OrderDtl.Status=='DELIVERED' ||OrderDtl.Status=='IN-TRANSIT' "  ng-click="changeCarrier(CarrVal,OrderDtl)"><span class="glyphicon glyphicon-floppy-disk"></span></a>
 					</td>
 				</tr>
 			</table>
