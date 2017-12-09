@@ -5,6 +5,12 @@
     "priority":"Premium"
 },
 {
+    "userName":"a",
+    "password":"a",
+    "role":"customer",
+    "priority":"Premium"
+},
+{
     "userName":"user2",
     "password":"user2",
     "role":"customer",
@@ -19,6 +25,12 @@
 {
     "userName":"admin1",
     "password":"admin1",
+    "role":"admin",
+    "priority":"na"
+},
+{
+    "userName":"b",
+    "password":"b",
     "role":"admin",
     "priority":"na"
 }
